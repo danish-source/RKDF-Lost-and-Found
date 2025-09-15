@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RKDF Lost & Found Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="app-header">
+        <div class="brand">
+            <img src="RKDF-LOGO.png" alt="RKDF Logo" class="logo">
+            <h1>RKDF Lost And Found Management</h1>
+        </div>
+        <div class="header-actions">
+            <button id="themeToggle" class="icon-button" aria-label="Toggle dark mode" title="Toggle theme">🌙</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="panel form-panel">
+            <h2>Report an Item</h2>
+            <form id="itemForm" novalidate>
+                <div class="form-row">
+                    <label for="itemType">Type</label>
+                    <select id="itemType" required>
+                        <option value="lost">Lost</option>
+                        <option value="found">Found</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label for="itemName">Item name</label>
+                    <input id="itemName" type="text" placeholder="e.g., iPhone 13, Wallet" required>
+                </div>
+                <div class="form-row">
+                    <label for="itemDescription">Description</label>
+                    <textarea id="itemDescription" rows="3" placeholder="Color, brand, unique identifiers" required></textarea>
+                </div>
+                <div class="form-row">
+                    <label for="itemLocation">Location</label>
+                    <input id="itemLocation" type="text" placeholder="Where it was lost/found" required>
+                </div>
+                <div class="form-row two-col">
+                    <div>
+                        <label for="itemDate">Date</label>
+                        <input id="itemDate" type="date">
+                    </div>
+                    <div>
+                        <label for="itemCategory">Category</label>
+                        <input id="itemCategory" type="text" placeholder="e.g., Electronics, ID, Bag">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="itemContact">Contact info</label>
+                    <input id="itemContact" type="text" placeholder="Email or phone" required>
+                </div>
+                <div class="form-row">
+                    <label for="itemImage">Image (optional)</label>
+                    <input id="itemImage" type="file" accept="image/*">
+                    <div id="imagePreview" class="image-preview hidden"></div>
+                    <small class="hint">For performance, keep images under 300 KB.</small>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="primary">Add Item</button>
+                    <button type="reset" class="ghost" id="resetForm">Reset</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="panel list-panel">
+            <div class="list-header">
+                <h2>Browse Items</h2>
+                <div class="search-row">
+                    <input id="searchInput" type="search" placeholder="Search by name, description, location, category...">
+                    <select id="filterType">
+                        <option value="all">All</option>
+                        <option value="lost">Lost</option>
+                        <option value="found">Found</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="lists">
+                <div class="list-column">
+                    <h3>Lost</h3>
+                    <div id="lostList" class="cards"></div>
+                </div>
+                <div class="list-column">
+                    <h3>Found</h3>
+                    <div id="foundList" class="cards"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <footer class="app-footer">
+        <p>© <span id="year"></span> RKDF Lost & Found Management — Help reunite items with their owners. Your listings stay only in your browser (no server storage).</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Default date to today
+        (function(){
+            const dateInput = document.getElementById('itemDate');
+            if (dateInput && !dateInput.value) {
+                const today = new Date();
+                const yyyy = today.getFullYear();
+                const mm = String(today.getMonth() + 1).padStart(2, '0');
+                const dd = String(today.getDate()).padStart(2, '0');
+                dateInput.value = `${yyyy}-${mm}-${dd}`;
+            }
+            const yearEl = document.getElementById('year');
+            if (yearEl) { yearEl.textContent = new Date().getFullYear(); }
+        })();
+    </script>
+</body>
+
+
