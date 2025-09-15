@@ -61,7 +61,7 @@
                     <label for="itemImage">Image (optional)</label>
                     <input id="itemImage" type="file" accept="image/*">
                     <div id="imagePreview" class="image-preview hidden"></div>
-                    <small class="hint">For performance, keep images under 300 KB.</small>
+                    <small class="hint">For performance, keep images under 3 MB.</small>
                 </div>
                 <div class="form-actions">
                     <button type="submit" class="primary">Add Item</button>
@@ -75,7 +75,7 @@
                 <h2>Browse Items</h2>
                 <div class="search-row">
                     <input id="searchInput" type="search" placeholder="Search by name, description, location, category...">
-                    <select id="filterType">
+                    <select id="filterType" name="filterType" aria-label="Filter items by type">
                         <option value="all">All</option>
                         <option value="lost">Lost</option>
                         <option value="found">Found</option>
@@ -99,25 +99,28 @@
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
     <footer class="app-footer">
-        <p>© <span id="year"></span> RKDF Lost & Found Management — Help reunite items with their owners. Your listings stay only in your browser (no server storage).</p>
+        <section class="footer-grid">
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+                    <li><a href="mailto:support@rkdf.edu">support@rkdf.edu</a></li>
+                    <li>RKDF University, Ranchi, JH</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>About</h4>
+                <p>Community-driven portal to reunite owners with their belongings. Data is stored locally in your browser.</p>
+            </div>
+        </section>
+        <div class="footer-bottom">
+            <p>© <span id="year"></span> RKDF Lost & Found Management. Listings are user-submitted; verify before exchange. No liability for loss or misuse of information.</p>
+        </div>
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        // Default date to today
-        (function(){
-            const dateInput = document.getElementById('itemDate');
-            if (dateInput && !dateInput.value) {
-                const today = new Date();
-                const yyyy = today.getFullYear();
-                const mm = String(today.getMonth() + 1).padStart(2, '0');
-                const dd = String(today.getDate()).padStart(2, '0');
-                dateInput.value = `${yyyy}-${mm}-${dd}`;
-            }
-            const yearEl = document.getElementById('year');
-            if (yearEl) { yearEl.textContent = new Date().getFullYear(); }
-        })();
-    </script>
 </body>
 
+
+</html>
 
