@@ -271,7 +271,25 @@ if(themeToggle){
 }
 
 // Init
+function setTodayDefaultDate(){
+    if(dateInput && !dateInput.value){
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        dateInput.value = `${yyyy}-${mm}-${dd}`;
+    }
+}
+
+function setFooterYear(){
+    const yearEl = document.getElementById('year');
+    if(yearEl){ yearEl.textContent = new Date().getFullYear(); }
+}
+
 loadTheme();
+setTodayDefaultDate();
+setFooterYear();
 renderLists();
+
 
 
